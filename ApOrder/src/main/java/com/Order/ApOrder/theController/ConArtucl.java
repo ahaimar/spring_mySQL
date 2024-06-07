@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@CrossOrigin("http://localhost:5173/")
+@CrossOrigin("http://localhost:5173/")
 @RestController("/Artucl")
 @RequestMapping
 public class ConArtucl {
@@ -23,7 +23,7 @@ public class ConArtucl {
 
         return new ResponseEntity<List<Artucle>>(this.serArtucle.getAllArtucle().get(), HttpStatus.OK);
     }
-    @GetMapping("/getArtuclByCin")
+    @GetMapping("/getArtucle")
     public ResponseEntity<Artucle> getArtucleById(@RequestParam Long id) {
         return new ResponseEntity<Artucle>(this.serArtucle.getArtucleById(id).get(), HttpStatus.OK);
     }

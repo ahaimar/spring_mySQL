@@ -4,6 +4,7 @@ import com.Order.ApOrder.theModel.Entity.User;
 import com.Order.ApOrder.theServerse.Service.SerUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class ConUser {
     private SerUser serUser;
 
     @PostMapping("/login")
-    public void login(@RequestBody String cin, @RequestBody String ferstName, @RequestBody String password,@RequestBody String email, @RequestBody String phone) {
+    public void login(@RequestBody String cin, @RequestBody String ferstName, @RequestBody String password, @RequestBody String email, @RequestBody String phone) {
 
         this.serUser.login(cin, ferstName, password,email, phone);
     }
@@ -30,7 +31,7 @@ public class ConUser {
 
         this.serUser.addUser(user);
     }
-    @PostMapping("/getUserByCin")
+    @PostMapping("/getUserByCin{/cin}")
     public ResponseEntity<User> getUserByCin(@RequestParam String cin)throws NoSuchElementException {
 
         return new ResponseEntity<User>(this.serUser.getUserByCin(cin).get(), HttpStatus.OK);
@@ -49,18 +50,11 @@ public class ConUser {
         this.serUser.updateUser(user);
     }
 
-    @DeleteMapping("/deleteUser")
+    @DeleteMapping("/deleteUser{/cin}")
     public void deleteUser(@RequestParam String cin) {
 
         this.serUser.deleteUser(cin);
     }
-
-    @GetMapping("/test")
-    public String test() {
-
-        return "test this code is done : ";
-    }
-
 }
 
 
