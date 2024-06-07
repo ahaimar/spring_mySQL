@@ -21,47 +21,21 @@ public class SerOrder implements OrderInterface {
     private RepOrder repOrder;
 
     @Override
-    public Optional<Order> addOrder(User usre, Supplier supplier, Artucle artucle) {
+    public Optional<Order> addOrder(Order order) {
 
-        Order order = new Order(usre, supplier, artucle);
-        try {
-            Order addedOrder = repOrder.save(order);
-            return Optional.of(addedOrder);
-        } catch (DataAccessException  ex) {
-            // Log the DataAccessException  or perform any necessary actions
-            // logger.error("Failed to add order: " + ex.getMessage(), ex);
-            ex.printStackTrace();
-            return Optional.empty();
-        }
+        return Optional.of(repOrder.save(order));
     }
 
     @Override
-    public Optional<Order> updateOrder(User client, Supplier supplier, Artucle artucle) {
+    public Optional<Order> updateOrder(Order order) {
 
-        try{
-            Order order = new Order(client, supplier, artucle);
-            Optional<Order> existingOrderOptional = repOrder.findById(order.getId());
-            if(existingOrderOptional.isPresent()){
-
-                Order existingOrder = existingOrderOptional.get();
-                existingOrder.setClient(order.getClient());
-                existingOrder.setSupplier(order.getSupplier());
-                Order updatedOrder = repOrder.save(existingOrder);
-                return Optional.of(updatedOrder);
-            }else {
-
-                return Optional.empty();
-            }
-        }catch (DataAccessException ex){
-
-            ex.printStackTrace();
-            return Optional.empty();
-        }
+        return Optional.of(repOrder.save(order));
     }
 
     @Override
-    public void deleteOrder(Order order) {
-        this.repOrder.delete(order);
+    public void deleteOrder(Long id) {
+
+        this.repOrder.deleteById(id);
     }
 
     @Override
@@ -74,14 +48,6 @@ public class SerOrder implements OrderInterface {
     @Override
     public Optional<List<Order>> getAllOrders() {
 
-        try{
-
-            List<Order> orders = this.repOrder.findAll();
-            return Optional.of(orders);
-        }catch (DataAccessException  ex) {
-            // Handle the DataAccessException  here, log it or perform any necessary actions
-            ex.printStackTrace();
-            return Optional.empty();
-        }
+        return Optional.of(repOrder.findAll());
     }
 }

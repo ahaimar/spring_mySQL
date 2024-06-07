@@ -13,18 +13,23 @@ import java.util.NoSuchElementException;
 
 @RequestMapping("/user")
 @RestController
+@CrossOrigin("http://localhost:5173")
 public class ConUser {
 
     @Autowired
     private SerUser serUser;
 
     @PostMapping("/login")
-    public void login(@RequestParam String cin, @RequestParam String ferstName, @RequestParam String lastName, @RequestParam String address, @RequestParam String email, @RequestParam String phone) {
+    public void login(@RequestBody String cin, @RequestBody String ferstName, @RequestBody String password,@RequestBody String email, @RequestBody String phone) {
 
-        User user = new User(cin, ferstName, lastName, address, email, phone);
-        this.serUser.addUser(user);
+        this.serUser.login(cin, ferstName, password,email, phone);
     }
 
+    @PostMapping("/addUser")
+    public void addUser(@RequestBody User user) {
+
+        this.serUser.addUser(user);
+    }
     @PostMapping("/getUserByCin")
     public ResponseEntity<User> getUserByCin(@RequestParam String cin)throws NoSuchElementException {
 

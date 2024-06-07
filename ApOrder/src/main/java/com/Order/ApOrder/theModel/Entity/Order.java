@@ -24,14 +24,6 @@ public class Order {
     private Supplier supplier;
     @ManyToOne
     private Artucle artucle;
-
-
-    public Order(User client, Supplier supplier, Artucle artucle) {
-        this.client = client;
-        this.supplier = supplier;
-        this.artucle = artucle;
-    }
-
 }
 
 

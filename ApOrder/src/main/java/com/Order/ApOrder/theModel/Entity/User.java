@@ -24,12 +24,11 @@ public class User implements Persent {
    private String email;
    private String phone;
 
-   public User(String cin, String ferstName, String lastName, String address, String email, String phone) {
+   public User(String cin, String ferstName, String password,String email, String phone) {
 
        this.cin = cin;
        this.ferstName = ferstName;
-       this.lastName = lastName;
-       this.address = address;
+       this.password = password;
        this.email = email;
        this.phone = phone;
    }

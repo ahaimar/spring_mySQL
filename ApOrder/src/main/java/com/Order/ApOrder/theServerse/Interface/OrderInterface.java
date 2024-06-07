@@ -1,20 +1,17 @@
 package com.Order.ApOrder.theServerse.Interface;
 
-import com.Order.ApOrder.theModel.Entity.Artucle;
 import com.Order.ApOrder.theModel.Entity.Order;
-import com.Order.ApOrder.theModel.Entity.Supplier;
-import com.Order.ApOrder.theModel.Entity.User;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface OrderInterface {
 
-    Optional<Order> addOrder(User client, Supplier supplier, Artucle artucle);
+    Optional<Order> addOrder(Order order);
 
-    Optional<Order> updateOrder(User client, Supplier supplier, Artucle artucle);
+    Optional<Order> updateOrder(Order order);
 
-    void deleteOrder(Order order);
+    void deleteOrder(Long id);
 
     Optional<Order> getOrder(Long id);
 

@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface RepSupplier extends JpaRepository<Supplier, String> {
 
-    public Optional<Supplier> findByCin(String cin);
+    Optional<Supplier> findByCin(String cin);
+    Optional<Supplier> deleteByCin(String cin);
 }

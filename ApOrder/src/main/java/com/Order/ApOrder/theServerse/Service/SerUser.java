@@ -19,6 +19,12 @@ public class SerUser implements UserInterface {
     /*++++++++++++++++++++++++++++|      the functions      |++++++++++++++++++++++++++++++++++++*/
 
     @Override
+    public Optional<User> login(String cin, String FerstName, String password, String email, String phone) {
+        User user = new User(cin, FerstName, password, email, phone);
+        return Optional.of(repUser.save(user));
+    }
+
+    @Override
     public Optional<User> getUserByCin(String cin){
         Optional<User> user = this.repUser.getEntUserByCin(cin);
         return user.map(Optional::ofNullable).orElse(Optional.empty());

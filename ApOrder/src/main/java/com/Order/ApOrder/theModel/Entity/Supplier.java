@@ -21,5 +21,4 @@ public class Supplier implements Persent {
     private String Phone;
     private String email;
     private int nomberSupplier = 1;
-
 }

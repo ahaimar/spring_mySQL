@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface UserInterface {
 
 
+    Optional<User> login(String cin, String FerstName, String password, String email, String phone);
     Optional<User> getUserByCin(String cin);
 
     Optional<User> addUser(User user);
