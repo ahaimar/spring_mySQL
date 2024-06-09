@@ -31,7 +31,7 @@ public class ConUser {
 
         this.serUser.addUser(user);
     }
-    @PostMapping("/getUserByCin{/cin}")
+    @PostMapping("/getUserByCin")
     public ResponseEntity<User> getUserByCin(@RequestParam String cin)throws NoSuchElementException {
 
         return new ResponseEntity<User>(this.serUser.getUserByCin(cin).get(), HttpStatus.OK);
@@ -50,7 +50,7 @@ public class ConUser {
         this.serUser.updateUser(user);
     }
 
-    @DeleteMapping("/deleteUser{/cin}")
+    @DeleteMapping("/deleteUser")
     public void deleteUser(@RequestParam String cin) {
 
         this.serUser.deleteUser(cin);

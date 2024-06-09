@@ -43,5 +43,4 @@ public class ConOrder {
     public void deleteOrder(@RequestParam Long id) {
         serOrder.deleteOrder(id);
     }
-
 }

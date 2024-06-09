@@ -25,17 +25,3 @@ public class Order {
     @ManyToOne
     private Artucle artucle;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
