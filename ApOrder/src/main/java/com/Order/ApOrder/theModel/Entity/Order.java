@@ -19,9 +19,13 @@ public class Order {
     private Long id;
     private LocalDateTime eventDateTime;
     @ManyToOne
-    private User client;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
     @ManyToOne
+    @JoinColumn(name = "supplier_id")
     private Supplier supplier;
     @ManyToOne
-    private Artucle artucle;
+    @JoinColumn(name = "product_id")
+    private Product product;
+    private int quantity;
 }

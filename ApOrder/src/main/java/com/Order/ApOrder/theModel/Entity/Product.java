@@ -4,18 +4,19 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "artucle")
+@Table(name = "product")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Artucle {
+public class Product {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nameArtucle;
-    private float priceArtucle;
-    private String descriptionArtucle = "(...)";
+    private String titleProduct;
+    private float price;
+    private String description= "(...)";
 
 }

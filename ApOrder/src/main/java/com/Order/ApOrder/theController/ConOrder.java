@@ -36,10 +36,11 @@ public class ConOrder {
         return new ResponseEntity<Order>(serOrder.getOrder(id).get(), HttpStatus.OK);
     }
     @PostMapping("/updateOrder")
-    public void updateOrder(@RequestBody Order order) {
-        serOrder.updateOrder(order);
+    public void updateOrder(@RequestBody Order order, @RequestParam Long id) {
+        serOrder.updateOrder(order, id);
     }
-    @DeleteMapping("/deleteOrder")
+
+    @DeleteMapping("/deleteOrder/{id}")
     public void deleteOrder(@RequestParam Long id) {
         serOrder.deleteOrder(id);
     }

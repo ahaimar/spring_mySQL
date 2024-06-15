@@ -9,7 +9,7 @@ public interface OrderInterface {
 
     Optional<Order> addOrder(Order order);
 
-    Optional<Order> updateOrder(Order order);
+    Optional<Order> updateOrder(Order order, Long id);
 
     void deleteOrder(Long id);
 
