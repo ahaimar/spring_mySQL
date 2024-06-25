@@ -2,18 +2,17 @@ package com.Order.ApOrder.theServerse.Interface;
 
 import com.Order.ApOrder.theModel.Entity.Product;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface ProductInterface {
 
     Optional<Product> addProduct(Product product);
 
-    Optional<Product> updateProduct(Product product, Long id);
+    Optional<Product> getProduct(Long id);
 
-    void deleteProduct(Long id);
+    Optional<Product> getAllProduct();
 
-    Optional<List<Product>> getAllProduct();
+    Optional<Product> upDataProduct(Product product, Long id);
 
-    Optional<Product> getProductById(Long id);
+    Optional<Product> deleteProduct(Long id);
 }

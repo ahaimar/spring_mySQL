@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface CustomerInterface {
 
 
-    Optional<Customer> login(Long id, String FerstName, String password, String email);
+    Optional<Customer> login(String FerstName, String password, String email);
     Optional<Customer> getUserById(Long id);
 
     Optional<Customer> addUser(Customer user);
@@ -17,5 +17,5 @@ public interface CustomerInterface {
 
     Optional<Customer> updateUser(Customer customer, Long id);
 
-    void deleteUser(String EntUserId);
+    Optional<Customer> deleteCustomer(Long id);
 }

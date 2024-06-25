@@ -36,4 +36,13 @@ public class Customer {
         this.email = email;
     }
 
+    public Customer(String phone, String email, int age, String password, String lastName, String firstName, String address) {
+        this.phone = phone;
+        this.email = email;
+        this.age = age;
+        this.password = password;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.address = address;
+    }
 }

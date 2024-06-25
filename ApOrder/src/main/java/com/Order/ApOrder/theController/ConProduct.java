@@ -1,6 +1,5 @@
 package com.Order.ApOrder.theController;
 
-
 import com.Order.ApOrder.theModel.Entity.Product;
 import com.Order.ApOrder.theServerse.Service.SerProduct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,45 +7,46 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@CrossOrigin("http://localhost:5173/")
-@RestController("/Artucl")
-@RequestMapping
+@RestController
+@RequestMapping("/product")
+@CrossOrigin("http://localhost:5173")
 public class ConProduct {
 
     @Autowired
-    private SerProduct serproduct;
-    
-    @GetMapping("/product")
-    public ResponseEntity<List<Product>> getProduct(){
+    private SerProduct serProduct;
 
-        return new ResponseEntity<List<Product>>(serproduct.getAllProduct().get(), HttpStatus.OK); 
+    @GetMapping("/getProduct/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable Long id){
+
+        return new ResponseEntity<>(this.serProduct.getProduct(id).get(), HttpStatus.OK);
     }
 
-    @GetMapping("/product/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id){
-        
-        return new ResponseEntity<Product>(serproduct.getProductById(id).get(), HttpStatus.OK); 
+    @GetMapping("/getAllProduct")
+    public ResponseEntity<Product> allProduct(){
+
+        return new ResponseEntity<>(this.serProduct.getAllProduct().get(), HttpStatus.OK);
     }
-    
-    @PostMapping("/product")
-    public ResponseEntity<Product> addProduct(@RequestBody Product product){
-        
-        return new ResponseEntity<Product>(serproduct.addProduct(product).orElseThrow(() -> new RuntimeException("Product not found")), HttpStatus.OK); 
+
+    @PostMapping("/addProduct")
+    public void addProduct(@RequestBody Product product){
+
+        this.serProduct.addProduct(product);
     }
-    
-    @PutMapping("/product")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable("id") Long id){
-        
-        return new ResponseEntity<Product>(serproduct.updateProduct(product, id).orElseThrow(() -> new RuntimeException("Product not found")), HttpStatus.OK); 
+
+    @PutMapping("/upDataProduct/{id}")
+    public ResponseEntity<Product> upData(@RequestBody Product product, @PathVariable String id){
+
+        try {
+            Long userId = Long.parseLong(id);
+            return new ResponseEntity<>(this.serProduct.upDataProduct(product, userId).get(), HttpStatus.OK);
+        } catch (NumberFormatException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
-    
-    @DeleteMapping("/product/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable("id") Long id){
-        
-        serproduct.deleteProduct(id);
-        return new ResponseEntity<>(HttpStatus.OK); 
+
+    @DeleteMapping("/deleteProduct/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+
+        this.serProduct.deleteProduct(id);
     }
-    
 }

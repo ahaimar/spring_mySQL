@@ -1,6 +1,14 @@
 {
 	"apifoxRelationMap":{},
 	"apifoxServerMap":{},
-	"environment":{},
+	"environment":{
+		"local":[
+			{
+				"enabled":true,
+				"type":"id",
+				"value":"1"
+			}
+		]
+	},
 	"pmRelationMap":{}
 }

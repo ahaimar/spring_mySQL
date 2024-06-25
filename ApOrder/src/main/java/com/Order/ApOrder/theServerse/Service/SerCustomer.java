@@ -16,50 +16,47 @@ public class SerCustomer implements CustomerInterface {
     private RepCustomer repUser;
 
     @Override
-    public Optional<Customer> login(Long id, String FerstName, String password, String email) {
+    public Optional<Customer> login(String FerstName, String password, String email) {
+
         Customer cos = new Customer(FerstName, password, email);
         return Optional.of(repUser.save(cos));
-
     }
-
     @Override
     public Optional<Customer> getUserById(Long id) {
 
         return Optional.of(repUser.findById(id).get());
     }
-
     @Override
     public Optional<Customer> addUser(Customer user) {
 
         return  Optional.of(repUser.save(user));
     }
-
     @Override
     public Optional<List<Customer>> getAllUsers() {
 
         return Optional.of(repUser.findAll());
     }
-
     @Override
     public Optional<Customer> updateUser(Customer customer, Long id) {
 
         return repUser.findById(id).map(user -> {
-
             user.setFirstName(customer.getFirstName());
             user.setLastName(customer.getLastName());
-            user.setPassword(customer.getPassword());
             user.setAddress(customer.getAddress());
             user.setAge(customer.getAge());
-            user.setEmail(customer.getEmail());
             user.setPhone(customer.getPhone());
+            user.setPassword(customer.getPassword());
+            user.setEmail(customer.getEmail());
             return repUser.save(user);
         });
     }
-
     @Override
-    public void deleteUser(String EntUserId) {
+    public Optional<Customer> deleteCustomer(Long id) {
 
-        repUser.deleteById(Long.parseLong(EntUserId));
+        return repUser.findById(id).map(user -> {
+            repUser.deleteById(id);
+            return user;
+        });
     }
 
 }
