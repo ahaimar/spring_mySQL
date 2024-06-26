@@ -8,13 +8,13 @@ import java.util.Optional;
 public interface SupplierInterface {
 
 
-    Optional<Supplier> getSupplierByCin(String cin);
+    Optional<Supplier> getSupplierById(Long id);
 
     Optional<Supplier> addSupplier(Supplier supplier);
 
     Optional<List<Supplier>> getAllSuppliers();
 
-    Optional<Supplier> updateSupplier(Supplier supplier);
+    Optional<Optional<Supplier>> updateSupplier(Supplier supplier, Long id);
 
-    void deleteSupplier(String EntSupplierId);
+    Optional<Supplier> deleteSupplier(Long id);
 }

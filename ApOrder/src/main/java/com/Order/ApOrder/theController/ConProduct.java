@@ -1,11 +1,15 @@
 package com.Order.ApOrder.theController;
 
+import com.Order.ApOrder.theModel.Entity.Customer;
 import com.Order.ApOrder.theModel.Entity.Product;
 import com.Order.ApOrder.theServerse.Service.SerProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/product")
@@ -22,7 +26,7 @@ public class ConProduct {
     }
 
     @GetMapping("/getAllProduct")
-    public ResponseEntity<Product> allProduct(){
+    public ResponseEntity<List<Product>> allProduct()throws NoSuchElementException{
 
         return new ResponseEntity<>(this.serProduct.getAllProduct().get(), HttpStatus.OK);
     }

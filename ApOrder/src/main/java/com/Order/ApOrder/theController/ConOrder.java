@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:5173/")
+@CrossOrigin("http://localhost:5173")
 @RequestMapping("/order")
 public class ConOrder {
 
@@ -19,29 +19,38 @@ public class ConOrder {
     private SerOrder serOrder;
 
 
-    @PostMapping
+    @PostMapping("/addOrder")
     public void addOrder(@RequestBody Order order) {
 
-        serOrder.addOrder(order);
+        this.serOrder.addOrder(order);
     }
+
     @GetMapping("/getAllOrder")
     public ResponseEntity<List<Order>> getAllOrder() {
 
         return new ResponseEntity<List<Order>>(serOrder.getAllOrders().get(), HttpStatus.OK);
     }
 
-    @GetMapping("/getOrderById")
-    public ResponseEntity<Order> getOrderById(@RequestParam Long id) {
+    @GetMapping("/getOrderById/{id}")
+    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
 
         return new ResponseEntity<Order>(serOrder.getOrder(id).get(), HttpStatus.OK);
     }
-    @PostMapping("/updateOrder")
-    public void updateOrder(@RequestBody Order order, @RequestParam Long id) {
-        serOrder.updateOrder(order, id);
+
+    @PutMapping("/updateOrder/{id}")
+    public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable String id) {
+
+        try {
+            Long orderId = Long.parseLong(id);
+            return new ResponseEntity<>(this.serOrder.updateOrder(order, orderId).get(), HttpStatus.OK);
+        }catch (NumberFormatException e) {
+
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/deleteOrder/{id}")
-    public void deleteOrder(@RequestParam Long id) {
-        serOrder.deleteOrder(id);
+    public void deleteOrder(@PathVariable Long id) {
+        this.serOrder.deleteOrder(id);
     }
 }

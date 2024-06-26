@@ -44,8 +44,7 @@ public class SerOrder implements OrderInterface {
     @Override
     public Optional<Order> getOrder(Long id) {
 
-        Optional<Order> order = this.repOrder.findById(id);
-        return order.map(Optional::ofNullable).orElse(Optional.empty());
+        return  Optional.of(this.repOrder.findById(id).get());
     }
 
     @Override

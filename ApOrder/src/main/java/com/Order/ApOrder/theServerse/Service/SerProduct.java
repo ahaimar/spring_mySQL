@@ -6,6 +6,7 @@ import com.Order.ApOrder.theServerse.Interface.ProductInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,7 +18,7 @@ public class SerProduct implements ProductInterface {
     @Override
     public Optional<Product> addProduct(Product product) {
 
-        return Optional.of(this.repProduct.save(product));
+        return  Optional.of(repProduct.save(product));
     }
 
     @Override
@@ -27,19 +28,20 @@ public class SerProduct implements ProductInterface {
     }
 
     @Override
-    public Optional<Product> getAllProduct() {
+    public Optional<List<Product>> getAllProduct() {
 
-        return Optional.of((Product) this.repProduct.findAll());
+        return Optional.of(this.repProduct.findAll());
     }
 
     @Override
     public Optional<Product> upDataProduct(Product product, Long id) {
-        return repProduct.findById(id).map(product1 -> {
 
-            product.setProductName(product.getProductName());
-            product.setDestination(product.getDestination());
-            product.setPrice(product.getPrice());
-            return repProduct.save(product);
+
+        return this.repProduct.findById(id).map(product1 -> {
+            product1.setProductName(product.getProductName());
+            product1.setDescription(product.getDescription());
+            product1.setPrice(product.getPrice());
+            return repProduct.save(product1);
         });
     }
 

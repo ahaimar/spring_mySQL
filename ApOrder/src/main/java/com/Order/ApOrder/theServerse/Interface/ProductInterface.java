@@ -2,6 +2,7 @@ package com.Order.ApOrder.theServerse.Interface;
 
 import com.Order.ApOrder.theModel.Entity.Product;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ProductInterface {
@@ -10,7 +11,7 @@ public interface ProductInterface {
 
     Optional<Product> getProduct(Long id);
 
-    Optional<Product> getAllProduct();
+    Optional<List<Product>> getAllProduct();
 
     Optional<Product> upDataProduct(Product product, Long id);
 
