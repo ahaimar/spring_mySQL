@@ -9,7 +9,10 @@ public interface CustomerInterface {
 
 
     Optional<Customer> login(String FerstName, String password, String email);
+
     Optional<Customer> getUserById(Long id);
+
+
 
     Optional<Customer> addUser(Customer user);
 

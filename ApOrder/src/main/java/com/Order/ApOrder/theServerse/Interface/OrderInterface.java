@@ -9,6 +9,8 @@ public interface OrderInterface {
 
     Optional<Order> addOrder(Order order);
 
+    Optional<Order> addAllOrder(List<Order> orders);
+
     Optional<Order> updateOrder(Order order, Long id);
 
     void deleteOrder(Long id);
@@ -16,4 +18,5 @@ public interface OrderInterface {
     Optional<Order> getOrder(Long id);
 
     Optional<List<Order>>  getAllOrders();
+
 }

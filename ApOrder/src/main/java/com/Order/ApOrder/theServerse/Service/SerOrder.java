@@ -23,6 +23,13 @@ public class SerOrder implements OrderInterface {
     }
 
     @Override
+    public Optional<Order> addAllOrder(List<Order> orders) {
+
+        List<Order> savedOrders = repOrder.saveAll(orders);
+        return Optional.of((Order) savedOrders);
+    }
+
+    @Override
     public Optional<Order> updateOrder(Order order, Long id) {
 
         return repOrder.findById(id).map(order1 -> {

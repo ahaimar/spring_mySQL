@@ -25,6 +25,12 @@ public class ConOrder {
         this.serOrder.addOrder(order);
     }
 
+    @PutMapping("/addAllOrders")
+    public void addAll(@RequestBody List<Order> orders){
+
+        this.serOrder.addAllOrder(orders);
+    }
+
     @GetMapping("/getAllOrder")
     public ResponseEntity<List<Order>> getAllOrder() {
 
