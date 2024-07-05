@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface CustomerInterface {
 
 
-    Optional<Customer> login(String FerstName, String password, String email);
+    Optional<Customer> login(String password, String email);
 
     Optional<Customer> getUserById(Long id);
 

@@ -16,11 +16,17 @@ public class SerCustomer implements CustomerInterface {
     private RepCustomer repUser;
 
     @Override
-    public Optional<Customer> login(String FerstName, String password, String email) {
+    public Optional<Customer> login(String email, String password) {
 
-        Customer cos = new Customer(FerstName, password, email);
-        return Optional.of(repUser.save(cos));
+        Optional<Customer> optionalCustomer = repUser.findByEmail(email);
+
+        if (optionalCustomer.isPresent() && optionalCustomer.get().getPassword().equals(password)) {
+            return optionalCustomer;
+        }else {
+            return Optional.empty();
+        }
     }
+
     @Override
     public Optional<Customer> getUserById(Long id) {
 
@@ -32,11 +38,13 @@ public class SerCustomer implements CustomerInterface {
 
         return  Optional.of(repUser.save(user));
     }
+
     @Override
     public Optional<List<Customer>> getAllUsers() {
 
         return Optional.of(repUser.findAll());
     }
+
     @Override
     public Optional<Customer> updateUser(Customer customer, Long id) {
 
@@ -51,6 +59,7 @@ public class SerCustomer implements CustomerInterface {
             return repUser.save(user);
         });
     }
+
     @Override
     public Optional<Customer> deleteCustomer(Long id) {
 

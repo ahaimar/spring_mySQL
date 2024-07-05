@@ -1,5 +1,6 @@
 package com.Order.ApOrder.theModel.Entity;
 
+import com.Order.ApOrder.theModel.Entity.interfac.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,6 +34,11 @@ public class Order {
     private Product product;
 
     private int quantity;
+
+    @Column(insertable = false)
+    @Enumerated(EnumType.STRING)
+    @Setter(AccessLevel.NONE)
+    private Status status = Status.PENDING;
 
 
     @PrePersist

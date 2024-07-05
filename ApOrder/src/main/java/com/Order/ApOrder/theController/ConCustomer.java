@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 
 @RequestMapping("/customer")
@@ -19,10 +20,15 @@ public class ConCustomer {
     @Autowired
     private SerCustomer serCustomer;
 
-    @PostMapping("/login")
-    public void login(@RequestBody String firstName, @RequestBody String password, @RequestBody String email) {
+    @GetMapping("/login")
+    public ResponseEntity<Customer> login(@RequestBody Customer cus) {
+        Optional<Customer> customer = serCustomer.login(cus.getEmail(), cus.getPassword());
 
-        this.serCustomer.login(firstName, password,email);
+        if (customer.isPresent()) {
+            return ResponseEntity.ok(customer.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
     @PostMapping("/addCustomer")
@@ -61,5 +67,4 @@ public class ConCustomer {
         this.serCustomer.deleteCustomer(id);
     }
 }
-
 
